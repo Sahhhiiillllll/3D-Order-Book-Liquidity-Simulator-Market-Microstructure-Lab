@@ -29,5 +29,5 @@ This project is a production-grade Streamlit dashboard that simulates and visual
 
 ---
 
-For questions or contributions, contact tubakhxn.
+
 
