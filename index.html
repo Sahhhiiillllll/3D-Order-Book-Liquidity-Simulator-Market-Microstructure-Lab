@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Order Book Liquidity Simulator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span>💹</span>
+        <div>
+          <h1>3D Order Book Liquidity Simulator</h1>
+          <p>Market Microstructure Lab</p>
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="midPrice">Mid Price</label>
+        <input id="midPrice" type="range" min="100" max="1000" value="500" step="1" />
+        <output id="midPriceValue">500</output>
+      </div>
+      <div class="control-group">
+        <label for="volatility">Volatility</label>
+        <input id="volatility" type="range" min="0.01" max="0.2" value="0.05" step="0.01" />
+        <output id="volatilityValue">0.05</output>
+      </div>
+      <div class="control-group checkbox-group">
+        <label><input id="spoofing" type="checkbox" /> Enable Spoofing</label>
+      </div>
+      <div class="control-group checkbox-group">
+        <label><input id="flashCrash" type="checkbox" /> Enable Flash Crash</label>
+      </div>
+      <div class="control-group">
+        <label for="imbalanceIntensity">Imbalance Intensity</label>
+        <input id="imbalanceIntensity" type="range" min="0" max="1" value="0.2" step="0.01" />
+        <output id="imbalanceIntensityValue">0.20</output>
+      </div>
+      <button id="simulateButton" class="btn">Run Simulation</button>
+      <div class="metrics">
+        <div><strong>Imbalance Metric</strong><span id="imbalanceMetric">0.000</span></div>
+        <div><strong>Liquidity Depth</strong><span id="liquidityDepth">0.0</span></div>
+      </div>
+      <p class="footer-note">Use mouse or touch to rotate, zoom, and explore the 3D surface.</p>
+    </aside>
+    <main class="main-panel">
+      <section class="hero">
+        <h2>Interactive 3D Liquidity Landscape</h2>
+        <p>Visualize bid/ask volume across price and time with a neon-style 3D surface.</p>
+      </section>
+      <div id="chart" class="chart"></div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
