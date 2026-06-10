@@ -8,51 +8,156 @@
   <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 </head>
 <body>
+  <div class="scene-bg"></div>
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand">
-        <span>💹</span>
+        <div class="brand-icon">💹</div>
         <div>
-          <h1>3D Order Book Liquidity Simulator</h1>
-          <p>Market Microstructure Lab</p>
+          <h1>Market Microstructure Lab</h1>
+          <p>3D order book liquidity simulator</p>
         </div>
       </div>
-      <div class="control-group">
-        <label for="midPrice">Mid Price</label>
-        <input id="midPrice" type="range" min="100" max="1000" value="500" step="1" />
-        <output id="midPriceValue">500</output>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Market Controls</h2>
+          <span class="badge">Live</span>
+        </div>
+
+        <div class="control-group">
+          <label for="midPrice">Mid Price</label>
+          <div class="range-row">
+            <input id="midPrice" type="range" min="100" max="1000" value="500" step="1" />
+            <output id="midPriceValue">500</output>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="volatility">Volatility</label>
+          <div class="range-row">
+            <input id="volatility" type="range" min="0.01" max="0.2" value="0.05" step="0.01" />
+            <output id="volatilityValue">0.05</output>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="imbalanceIntensity">Imbalance Intensity</label>
+          <div class="range-row">
+            <input id="imbalanceIntensity" type="range" min="0" max="1" value="0.2" step="0.01" />
+            <output id="imbalanceIntensityValue">0.20</output>
+          </div>
+        </div>
+
+        <div class="checkbox-grid">
+          <label class="checkbox-label"><input id="spoofing" type="checkbox" /> Enable Spoofing</label>
+          <label class="checkbox-label"><input id="flashCrash" type="checkbox" /> Enable Flash Crash</label>
+        </div>
+
+        <div class="button-row">
+          <button id="simulateButton" class="btn">Run Simulation</button>
+          <button id="animateButton" class="btn secondary">Animate Market</button>
+        </div>
+
+        <div class="metrics-panel">
+          <div class="metric-card">
+            <span>Imbalance</span>
+            <strong id="imbalanceMetric">0.000</strong>
+          </div>
+          <div class="metric-card">
+            <span>Depth</span>
+            <strong id="liquidityDepth">0.0</strong>
+          </div>
+          <div class="metric-card">
+            <span>Mode</span>
+            <strong id="marketMode">Neutral</strong>
+          </div>
+        </div>
       </div>
-      <div class="control-group">
-        <label for="volatility">Volatility</label>
-        <input id="volatility" type="range" min="0.01" max="0.2" value="0.05" step="0.01" />
-        <output id="volatilityValue">0.05</output>
+
+      <div class="panel footer-panel">
+        <p>Drag the chart to inspect price-time liquidity structures. Use the controls to explore spoofing, flash crash, and imbalance regimes.</p>
       </div>
-      <div class="control-group checkbox-group">
-        <label><input id="spoofing" type="checkbox" /> Enable Spoofing</label>
-      </div>
-      <div class="control-group checkbox-group">
-        <label><input id="flashCrash" type="checkbox" /> Enable Flash Crash</label>
-      </div>
-      <div class="control-group">
-        <label for="imbalanceIntensity">Imbalance Intensity</label>
-        <input id="imbalanceIntensity" type="range" min="0" max="1" value="0.2" step="0.01" />
-        <output id="imbalanceIntensityValue">0.20</output>
-      </div>
-      <button id="simulateButton" class="btn">Run Simulation</button>
-      <div class="metrics">
-        <div><strong>Imbalance Metric</strong><span id="imbalanceMetric">0.000</span></div>
-        <div><strong>Liquidity Depth</strong><span id="liquidityDepth">0.0</span></div>
-      </div>
-      <p class="footer-note">Use mouse or touch to rotate, zoom, and explore the 3D surface.</p>
     </aside>
+
     <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Executive Dashboard</p>
+          <h2>Live 3D limit order book simulation</h2>
+        </div>
+        <div class="top-actions">
+          <a href="#" class="ghost">Docs</a>
+          <a href="#" class="ghost">Feedback</a>
+        </div>
+      </header>
+
       <section class="hero">
-        <h2>Interactive 3D Liquidity Landscape</h2>
-        <p>Visualize bid/ask volume across price and time with a neon-style 3D surface.</p>
+        <div class="hero-copy">
+          <h1>Visualize liquidity in modern markets.</h1>
+          <p>Simulate bid/ask volume in a premium dark-mode order book environment with real-time metrics, animated motion, and pro trading lab styling.</p>
+        </div>
+        <div class="hero-cards">
+          <article class="hero-card">
+            <span class="hero-title">Auto-refresh chart</span>
+            <p>Keep the view animated while the market pulse evolves.</p>
+          </article>
+          <article class="hero-card">
+            <span class="hero-title">Neon bid/ask surface</span>
+            <p>High-contrast liquidity visualization in 3D.</p>
+          </article>
+          <article class="hero-card">
+            <span class="hero-title">Dark lab interface</span>
+            <p>Professional layout for finance and research demos.</p>
+          </article>
+        </div>
       </section>
-      <div id="chart" class="chart"></div>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <h3>Order book depth</h3>
+          <p>Average liquidity across price levels and time horizons.</p>
+        </article>
+        <article class="stat-card">
+          <h3>Market stress</h3>
+          <p>Observe how volatility, spoofing, and flash crashes impact liquidity.</p>
+        </article>
+        <article class="stat-card">
+          <h3>Realtime mode</h3>
+          <p>Neutral, skewed, or crash scenarios with one click control.</p>
+        </article>
+      </section>
+
+      <section class="visualization-panel">
+        <div class="viz-header">
+          <div>
+            <p class="eyebrow">3D Simulator</p>
+            <h3>Order book liquidity surface</h3>
+          </div>
+          <div class="viz-meta">
+            <span>Press <strong>Animate Market</strong> for smooth rotational motion.</span>
+          </div>
+        </div>
+        <div id="chart" class="chart"></div>
+      </section>
+
+      <section class="feature-cards">
+        <article class="feature-card">
+          <h4>Professional analytics</h4>
+          <p>Premium dashboard design with crisp typography and glass panels.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Responsive layout</h4>
+          <p>Adapts across wide desktop screens and mobile-sized panels.</p>
+        </article>
+        <article class="feature-card">
+          <h4>Production visuals</h4>
+          <p>Dark gradients, neon highlights, and motion-ready transitions.</p>
+        </article>
+      </section>
     </main>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
